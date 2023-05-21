@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Action} from "../models/team.model";
 import {Pokemon} from "../models/pokemon.model";
-import {scan, shareReplay} from "rxjs/operators";
+import {debounceTime, scan, shareReplay} from "rxjs/operators";
 import {BehaviorSubject, Subject, tap} from "rxjs";
 
 @Injectable({
@@ -12,10 +12,15 @@ export class TeamService {
   // Add pokemon action
   private pokemonSubject$ = new Subject<Action<Pokemon>>();
   pokemonAction$ = this.pokemonSubject$.asObservable();
-  money$ = new BehaviorSubject<number>(0)
+  money$ = new BehaviorSubject<number>(0);
+  catchingStatus$ = new BehaviorSubject<boolean>(false);
+  fightingStatus$ = new BehaviorSubject<boolean>(false);
+  healingStatus$ = new BehaviorSubject<boolean>(false);
+  releasingStatus$ = new BehaviorSubject<boolean>(false);
 
   pokemons$ = this.pokemonAction$
     .pipe(
+      debounceTime(500),
       scan((items, pokemonAction) =>
         this.modifyTeam(items, pokemonAction), [] as Pokemon[]),
       shareReplay(1)
@@ -52,11 +57,13 @@ export class TeamService {
   private modifyTeam(pokemons: Pokemon[], operation: Action<Pokemon>): Pokemon[] {
     if (operation.action === 'add') {
       if (pokemons.length < 6) {
+        this.catchingStatus$.next(false);
         return [...pokemons, operation.pokemon];
       }
     } else if (operation.action === 'fight') {
       const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
       if (pokemonToUpdate) {
+        this.fightingStatus$.next(false);
         if (pokemonToUpdate.currentHp$.getValue() > 0) {
           const randomDamage = Math.floor(Math.random() * 50) + 1;
           const randomMoveIndex = Math.floor(Math.random() * pokemonToUpdate.moves.length);
@@ -73,8 +80,10 @@ export class TeamService {
       }
       return pokemons;
     } else if (operation.action === 'delete') {
+      this.releasingStatus$.next(false);
       return pokemons.filter(pokemon => pokemon !== operation.pokemon);
     } else if (operation.action === 'heal') {
+      this.healingStatus$.next(false);
       const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
       if (pokemonToUpdate) {
         const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);

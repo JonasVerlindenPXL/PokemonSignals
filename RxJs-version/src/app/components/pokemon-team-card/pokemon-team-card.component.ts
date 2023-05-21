@@ -11,6 +11,9 @@ import {TeamService} from "../../services/team.service";
 export class PokemonTeamCardComponent {
   @Input() pokemon!: Pokemon;
   errorMessage: string = "";
+  fighting$ = this.teamService.fightingStatus$;
+  healing$ = this.teamService.healingStatus$;
+  releasing$ = this.teamService.releasingStatus$;
 
   constructor(private teamService: TeamService, private colorDetermineService: ColorDetermineService) {
   }
@@ -44,16 +47,19 @@ export class PokemonTeamCardComponent {
   }
 
   deleteClickedPokemon(pokemonToDelete: Pokemon) {
+    this.teamService.releasingStatus$.next(true);
     this.teamService.removeFromTeam(pokemonToDelete);
   }
 
   healPokemon(pokemon: Pokemon) {
+    this.teamService.healingStatus$.next(true);
     this.teamService.healPokemon(pokemon)
     this.errorMessage = ""
   }
 
   fightWithPokemon(pokemon: Pokemon) {
     if (pokemon.currentHp$.getValue() > 0){
+      this.teamService.fightingStatus$.next(true);
       this.teamService.fightPokemon(pokemon);
     } else {
       this.errorMessage = "Your pokemon has fainted. Heal it to fight again!"

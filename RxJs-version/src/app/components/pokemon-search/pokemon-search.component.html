@@ -5,14 +5,12 @@
   <button type="submit">Search</button>
 </form>
 
-<div *ngIf="pokemon$ | async as pokemon; else loading">
+<div *ngIf="pokemon$ | async as pokemon">
   <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
   <button (click)="addPokemon(pokemon)">Capture!</button>
 </div>
-
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
-
+<div class="pokemon-catching" *ngIf="(catching$ | async)">
+  <h3>Catching pokemon</h3>
+</div>
 <p *ngIf="errorMessage">{{errorMessage}}</p>
 
