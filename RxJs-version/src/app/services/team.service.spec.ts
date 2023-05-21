@@ -2,6 +2,7 @@ import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 import { TeamService } from './team.service';
 import { Pokemon } from '../models/pokemon.model';
+import {map} from "rxjs/operators";
 
 describe('TeamService', () => {
   let service: TeamService;
@@ -22,15 +23,17 @@ describe('TeamService', () => {
     };
   });
 
-  it('should add a Pokemon to the team', fakeAsync(() => {
+  it('should add a Pokemon to the team with delay', fakeAsync(() => {
+    let pokemons: Pokemon[] | undefined = undefined;
 
-
-    service.addToTeam(pokemon);
-    tick(500);
-
-    service.pokemons$.subscribe((pokemons) => {
-      expect(pokemons).toContain(pokemon);
+    service.pokemons$.subscribe((pokemonsInTeam) => {
+      pokemons = pokemonsInTeam;
     });
+    service.addToTeam(pokemon);
+
+    expect(pokemons).toBeUndefined();
+    tick(800);
+    expect(pokemons).toContain(pokemon);
   }));
 
   it('should remove a Pokemon from the team', () => {
