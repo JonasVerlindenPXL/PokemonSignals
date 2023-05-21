@@ -1,6 +1,7 @@
 <div class="card" [ngStyle]="getCardStyles()">
   <div class="pokemon-card">
     <div class="pokemon-sprite">
+      <h2>{{pokemon.name | titlecase}}</h2>
       <img [src]="pokemon.sprites.front_default" alt="Pokemon Sprite">
     </div>
     <div class="pokemon-details">
@@ -14,7 +15,7 @@
       </div>
       <div class="pokemon-types">
         <span class="type" *ngFor="let type of pokemon.types"
-              [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name }}</span>
+              [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name}}</span>
       </div>
       <div class="pokemon-moves">
         <div *ngFor="let move of pokemon.moves" class="pokemon-move">
@@ -25,4 +26,7 @@
   </div>
 </div>
 <button (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</button>
+<button (click)="fightWithPokemon(pokemon)" class="release-button">Fight with {{pokemon.name | titlecase}}</button>
+<button (click)="healPokemon(pokemon)" class="release-button">Heal {{pokemon.name | titlecase}}</button>
+<p>{{errorMessage}}</p>
 

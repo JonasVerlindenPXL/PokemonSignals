@@ -10,9 +10,11 @@ import {TeamService} from "../../services/team.service";
 })
 export class PokemonTeamCardComponent {
   @Input() pokemon!: Pokemon;
+  errorMessage: string = "";
 
-  constructor(private teamService: TeamService,private colorDetermineService: ColorDetermineService) {
+  constructor(private teamService: TeamService, private colorDetermineService: ColorDetermineService) {
   }
+
   getHpBarWidth(pokemon: Pokemon): string {
     const percentage = (pokemon.currentHp$.getValue() / pokemon.baseHp) * 100;
     const barWidth = (percentage / 100) * 200;
@@ -23,13 +25,13 @@ export class PokemonTeamCardComponent {
     const typeNames = this.pokemon.types.map(type => type.type.name);
     if (typeNames.length > 1) {
       // Apply gradient background for multiple types
-      return { 'background-image': this.getTypeColorBorder('') };
+      return {'background-image': this.getTypeColorBorder('')};
     } else if (typeNames.length === 1) {
       // Apply solid color for a single type
-      return { 'background-color': this.getTypeColorBorder(typeNames[0]) };
+      return {'background-color': this.getTypeColorBorder(typeNames[0])};
     } else {
       // Default background color if no types are available
-      return { 'background-color': '#ffffff' };
+      return {'background-color': '#ffffff'};
     }
   }
 
@@ -41,7 +43,20 @@ export class PokemonTeamCardComponent {
     return this.colorDetermineService.getTypeColor(typeName);
   }
 
-  deleteClickedPokemon(pokemonToDelete: Pokemon){
+  deleteClickedPokemon(pokemonToDelete: Pokemon) {
     this.teamService.removeFromTeam(pokemonToDelete);
+  }
+
+  healPokemon(pokemon: Pokemon) {
+    this.teamService.healPokemon(pokemon)
+    this.errorMessage = ""
+  }
+
+  fightWithPokemon(pokemon: Pokemon) {
+    if (pokemon.currentHp$.getValue() > 0){
+      this.teamService.fightPokemon(pokemon);
+    } else {
+      this.errorMessage = "Your pokemon has fainted. Heal it to fight again!"
+    }
   }
 }

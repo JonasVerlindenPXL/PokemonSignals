@@ -12,23 +12,8 @@ export class HomePageComponent {
   teamSet$ = this.teamService.pokemons$
     .pipe(
       map(pokemons => pokemons.length > 0));
+  money$ = this.teamService.money$;
 
   constructor(private teamService: TeamService) {
-  }
-
-  simulateFight() {
-    this.pokemons$.pipe(take(1)).subscribe(pokemons => {
-      pokemons.forEach(pokemon => {
-        this.teamService.fightPokemon(pokemon);
-      });
-    });
-  }
-
-  healTeam() {
-    this.pokemons$.pipe(take(1)).subscribe(pokemons => {
-      pokemons.forEach(pokemon => {
-        this.teamService.healPokemon(pokemon);
-      });
-    });
   }
 }

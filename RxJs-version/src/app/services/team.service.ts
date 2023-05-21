@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Action} from "../models/team.model";
 import {Pokemon} from "../models/pokemon.model";
 import {scan, shareReplay} from "rxjs/operators";
-import {Subject, tap} from "rxjs";
+import {BehaviorSubject, Subject, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,12 @@ export class TeamService {
   // Add pokemon action
   private pokemonSubject$ = new Subject<Action<Pokemon>>();
   pokemonAction$ = this.pokemonSubject$.asObservable();
+  money$ = new BehaviorSubject<number>(0)
 
   pokemons$ = this.pokemonAction$
     .pipe(
-      scan((items, itemAction) =>
-        this.modifyTeam(items, itemAction), [] as Pokemon[]),
+      scan((items, pokemonAction) =>
+        this.modifyTeam(items, pokemonAction), [] as Pokemon[]),
       shareReplay(1)
     );
 
@@ -67,6 +68,7 @@ export class TeamService {
 
           pokemonToUpdate.currentHp$.next(updatedHp);
           randomMove.currentPp = updatedPp;
+          this.money$.next(this.money$.getValue() + 10);
         }
       }
       return pokemons;
@@ -81,6 +83,7 @@ export class TeamService {
           pokemonToUpdate.moves.forEach(move => {
             move.move.currentPp = move.move.maxPp;
           });
+          this.money$.next(this.money$.getValue() - 10);
         }
         return pokemons;
       }
