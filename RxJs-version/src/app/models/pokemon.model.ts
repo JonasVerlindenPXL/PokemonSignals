@@ -45,7 +45,5 @@ export interface Stat{
 
 export interface Sprites {
   front_default: string;
-  back_default: string;
-  frontShiny: string;
-  backShiny: string;
+
 }

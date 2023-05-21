@@ -20,7 +20,7 @@ export class TeamService {
 
   pokemons$ = this.pokemonAction$
     .pipe(
-      debounceTime(500),
+      debounceTime(800),
       scan((items, pokemonAction) =>
         this.modifyTeam(items, pokemonAction), [] as Pokemon[]),
       shareReplay(1)
