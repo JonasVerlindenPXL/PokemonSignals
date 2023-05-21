@@ -23,7 +23,7 @@ describe('TeamService', () => {
     };
   });
 
-  it('should add a Pokemon to the team with delay', fakeAsync(() => {
+  it('should add a Pokemon to the team with delay used fakeAsync', fakeAsync(() => {
     let pokemons: Pokemon[] | undefined = undefined;
 
     service.pokemons$.subscribe((pokemonsInTeam) => {
@@ -35,6 +35,14 @@ describe('TeamService', () => {
     tick(800);
     expect(pokemons).toContain(pokemon);
   }));
+
+  it('should add a Pokemon to the team with delay (used done)', (done) => {
+    service.pokemons$.subscribe((pokemons) => {
+      expect(pokemons).toContain(pokemon);
+      done();
+    });
+    service.addToTeam(pokemon);
+  });
 
   it('should remove a Pokemon from the team', () => {
     service.addToTeam(pokemon);
