@@ -1,0 +1,74 @@
+.card{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 450px;
+}
+.pokemon-card {
+  display: flex;
+  align-items: center;
+  background-color: #e1e1e1;
+  padding: 10px;
+  border-radius: 5px;
+  width: 450px;
+}
+
+.pokemon-sprite img {
+  width: 100px;
+  height: 100px;
+}
+
+.pokemon-details {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.pokemon-hp {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.pokemon-types {
+  display: flex;
+}
+
+.pokemon-types .type {
+  display: inline-block;
+  background-color: #ffcc00;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.gradient {
+  background: linear-gradient(to right, red, blue);
+}
+.hp-bar {
+  height: 10px;
+  background-color: gray;
+  width: 150px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.hp-bar-inner {
+  height: 100%;
+  width: 100%;
+  transition: width 0.3s;
+  position: relative;
+}
+
+.hp-bar-fill {
+  background-color: green;
+  height: 100%;
+}
+.pokemon-moves{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+}
+.release-button{
+  margin: 5px;
+}

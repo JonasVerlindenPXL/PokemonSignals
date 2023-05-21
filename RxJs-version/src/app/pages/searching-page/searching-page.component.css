@@ -1,0 +1,17 @@
+.container{
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+.container-left{
+  background-color: #efefef;
+  border-radius: 2rem;
+  margin: 1rem;
+  padding: 2rem;
+
+}
+.container-right-team{
+  display: grid;
+  grid-template-columns: repeat(2, 49%);
+  gap: 1%;
+}

@@ -1,0 +1,28 @@
+<div class="card" [ngStyle]="getCardStyles()">
+  <div class="pokemon-card">
+    <div class="pokemon-sprite">
+      <img [src]="pokemon.sprites.front_default" alt="Pokemon Sprite">
+    </div>
+    <div class="pokemon-details">
+      <div class="pokemon-hp">
+        <div class="hp-bar">
+          <div class="hp-bar-inner">
+            <div class="hp-bar-fill" [ngStyle]="{'width': getHpBarWidth(pokemon)}"></div>
+          </div>
+        </div>
+        <p>{{ pokemon.currentHp }} / {{ pokemon.baseHp }}</p>
+      </div>
+      <div class="pokemon-types">
+        <span class="type" *ngFor="let type of pokemon.types"
+              [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name }}</span>
+      </div>
+      <div class="pokemon-moves">
+        <div *ngFor="let move of pokemon.moves" class="pokemon-move">
+          <app-move-tile [move]="move.move"></app-move-tile>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</button>
+

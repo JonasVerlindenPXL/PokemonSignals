@@ -1,0 +1,29 @@
+<div class="pokemon-card">
+  <div class="pokemon-image">
+    <img [src]="pokemon.sprites.front_default" alt="Pokemon Image">
+  </div>
+  <div class="pokemon-details">
+    <h2>{{ pokemon.name }}</h2>
+    <div class="pokemon-types">
+      <span class="type" *ngFor="let type of pokemon.types"
+            [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name }}</span>
+    </div>
+    <div class="pokemon-moves">
+      <h3>Moves</h3>
+      <ul>
+        <li *ngFor="let move of pokemon.moves">
+          {{ move.move.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="pokemon-stats">
+      <h3>Stats</h3>
+      <ul>
+        <li *ngFor="let stat of pokemon.stats">
+          <span class="stat-name">{{ stat.stat.name }}:</span>
+          <span class="stat-value">{{ stat.base_stat }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
