@@ -17,7 +17,6 @@ export class TeamService {
     .pipe(
       scan((items, itemAction) =>
         this.modifyTeam(items, itemAction), [] as Pokemon[]),
-      tap(() => console.log("test")),
       shareReplay(1)
     );
 
@@ -51,20 +50,23 @@ export class TeamService {
 
   private modifyTeam(pokemons: Pokemon[], operation: Action<Pokemon>): Pokemon[] {
     if (operation.action === 'add') {
-      if (pokemons.length < 6){
+      if (pokemons.length < 6) {
         return [...pokemons, operation.pokemon];
       }
     } else if (operation.action === 'fight') {
       const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
       if (pokemonToUpdate) {
-        if (pokemonToUpdate.currentHp > 0){
+        if (pokemonToUpdate.currentHp$.getValue() > 0) {
           const randomDamage = Math.floor(Math.random() * 50) + 1;
           const randomMoveIndex = Math.floor(Math.random() * pokemonToUpdate.moves.length);
           const randomMove = pokemonToUpdate.moves[randomMoveIndex].move;
           const randomPpCost = Math.floor(Math.random() * randomMove.maxPp) + 1;
 
-          pokemonToUpdate.currentHp = (pokemonToUpdate.currentHp - randomDamage) < 0 ? 0 : pokemonToUpdate.currentHp - randomDamage;
-          randomMove.currentPp = (randomMove.currentPp - randomPpCost) < 0 ? 0 : randomMove.currentPp - randomPpCost;
+          const updatedHp = (pokemonToUpdate.currentHp$.getValue() - randomDamage) < 0 ? 0 : pokemonToUpdate.currentHp$.getValue() - randomDamage;
+          const updatedPp = (randomMove.currentPp - randomPpCost) < 0 ? 0 : randomMove.currentPp - randomPpCost;
+
+          pokemonToUpdate.currentHp$.next(updatedHp);
+          randomMove.currentPp = updatedPp;
         }
       }
       return pokemons;
@@ -73,14 +75,17 @@ export class TeamService {
     } else if (operation.action === 'heal') {
       const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
       if (pokemonToUpdate) {
-        pokemonToUpdate.currentHp = pokemonToUpdate.baseHp;
-        pokemonToUpdate.moves.forEach(move => {
-          move.move.currentPp = move.move.maxPp
-        })
+        const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
+        if (pokemonToUpdate) {
+          pokemonToUpdate.currentHp$.next(pokemonToUpdate.baseHp);
+          pokemonToUpdate.moves.forEach(move => {
+            move.move.currentPp = move.move.maxPp;
+          });
+        }
+        return pokemons;
       }
-      return pokemons;
+      return [...pokemons];
     }
     return [...pokemons];
   }
-
 }

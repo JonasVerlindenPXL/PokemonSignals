@@ -17,22 +17,18 @@ export class HomePageComponent {
   }
 
   simulateFight() {
-    this.pokemons$.pipe(
-      take(1),
-      map(pokemons => {
-        pokemons.forEach(pokemon => {
-          this.teamService.fightPokemon(pokemon)
-        })
-      })).subscribe()
+    this.pokemons$.pipe(take(1)).subscribe(pokemons => {
+      pokemons.forEach(pokemon => {
+        this.teamService.fightPokemon(pokemon);
+      });
+    });
   }
 
   healTeam() {
-    this.pokemons$.pipe(
-      take(1),
-      map(pokemons => {
-        pokemons.forEach(pokemon => {
-          this.teamService.healPokemon(pokemon)
-        })
-      })).subscribe()
+    this.pokemons$.pipe(take(1)).subscribe(pokemons => {
+      pokemons.forEach(pokemon => {
+        this.teamService.healPokemon(pokemon);
+      });
+    });
   }
 }

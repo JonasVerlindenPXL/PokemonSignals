@@ -1,4 +1,7 @@
+import {BehaviorSubject} from "rxjs";
+
 export class Pokemon {
+  public currentHp$: BehaviorSubject<number>
   constructor(
     public name: string,
     public types: Types[],
@@ -7,7 +10,9 @@ export class Pokemon {
     public sprites: Sprites,
     public baseHp: number,
     public currentHp: number
-  ) {}
+  ) {
+    this.currentHp$ = new BehaviorSubject<number>(currentHp);
+  }
 }
 export interface Types {
   slot: string;

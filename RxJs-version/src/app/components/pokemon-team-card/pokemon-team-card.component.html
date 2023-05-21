@@ -10,7 +10,7 @@
             <div class="hp-bar-fill" [ngStyle]="{'width': getHpBarWidth(pokemon)}"></div>
           </div>
         </div>
-        <p>{{ pokemon.currentHp }} / {{ pokemon.baseHp }}</p>
+        <p>{{ pokemon.currentHp$.getValue() }} / {{ pokemon.baseHp }}</p>
       </div>
       <div class="pokemon-types">
         <span class="type" *ngFor="let type of pokemon.types"

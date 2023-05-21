@@ -14,7 +14,7 @@ export class PokemonTeamCardComponent {
   constructor(private teamService: TeamService,private colorDetermineService: ColorDetermineService) {
   }
   getHpBarWidth(pokemon: Pokemon): string {
-    const percentage = (pokemon.currentHp / pokemon.baseHp) * 100;
+    const percentage = (pokemon.currentHp$.getValue() / pokemon.baseHp) * 100;
     const barWidth = (percentage / 100) * 200;
     return `${barWidth}px`;
   }
