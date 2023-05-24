@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 40vw;
   padding: 2rem;
   background-color: #fafafa;
@@ -11,6 +11,7 @@
   display: grid;
   grid-gap: 2rem;
 }
-h2{
+
+h2 {
   margin: 20px;
 }

@@ -52,12 +52,13 @@ export class PokemonApiService {
   }
 
   private getRandomMoves(moves: Moves[], count: number): Moves[] {
-    const randomIndices = Array.from({ length: moves.length }, (_, index) => index)
+    const randomIndices = Array.from({length: moves.length}, (_, index) => index)
       .sort(() => Math.random() - 0.5)
       .slice(0, count);
 
     return randomIndices.map((index) => moves[index]);
   }
+
   constructor(private http: HttpClient) {
   }
 

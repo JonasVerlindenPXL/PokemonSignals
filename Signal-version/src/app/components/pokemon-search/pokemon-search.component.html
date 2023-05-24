@@ -1,18 +1,16 @@
-<!-- pokemon-search.component.html -->
-<form (ngSubmit)="searchPokemon(pokemonName.value)">
-  <label for="pokemonName">Enter Pokemon name:</label>
-  <input type="text" id="pokemonName" name="pokemonName" #pokemonName required>
-  <button type="submit">Search</button>
-</form>
+<div class="container">
+  <form (ngSubmit)="searchPokemon(pokemonName.value)">
+    <label for="pokemonName">Enter Pokemon name:</label>
+    <input type="text" id="pokemonName" name="pokemonName" #pokemonName required>
+    <p-button styleClass="p-button-rounded" type="submit">Search</p-button>
+  </form>
 
-<div *ngIf="pokemon$ | async as pokemon; else loading">
-  <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
-  <button (click)="addPokemon(pokemon)">Capture!</button>
+  <div *ngIf="pokemon$ | async as pokemon" class="container">
+    <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
+    <p-button styleClass="p-button-rounded" (click)="addPokemon(pokemon)">Capture!</p-button>
+  </div>
+  <div class="pokemon-catching" *ngIf="(catching$ | async)">
+    <h3>Catching pokemon</h3>
+  </div>
+  <p *ngIf="errorMessage">{{errorMessage}}</p>
 </div>
-
-<ng-template #loading>
-  <p>Loading...</p>
-</ng-template>
-
-<p *ngIf="errorMessage">{{errorMessage}}</p>
-

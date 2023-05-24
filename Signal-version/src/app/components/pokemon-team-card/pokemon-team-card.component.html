@@ -1,6 +1,7 @@
 <div class="card" [ngStyle]="getCardStyles()">
   <div class="pokemon-card">
     <div class="pokemon-sprite">
+      <h2>{{pokemon.name | titlecase}}</h2>
       <img [src]="pokemon.sprites.front_default" alt="Pokemon Sprite">
     </div>
     <div class="pokemon-details">
@@ -10,11 +11,11 @@
             <div class="hp-bar-fill" [ngStyle]="{'width': getHpBarWidth(pokemon)}"></div>
           </div>
         </div>
-        <p>{{ pokemon.currentHp }} / {{ pokemon.baseHp }}</p>
+        <p>{{ pokemon.currentHp$.getValue() }} / {{ pokemon.baseHp }}</p>
       </div>
       <div class="pokemon-types">
         <span class="type" *ngFor="let type of pokemon.types"
-              [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name }}</span>
+              [ngStyle]="{ backgroundColor: getTypeColor(type.type.name) }">{{ type.type.name}}</span>
       </div>
       <div class="pokemon-moves">
         <div *ngFor="let move of pokemon.moves" class="pokemon-move">
@@ -24,5 +25,11 @@
     </div>
   </div>
 </div>
-<button (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</button>
+
+<div class="actions">
+  <p-button styleClass="p-button-rounded p-button-secondary" (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</p-button>
+  <p-button *ngIf="combatActionsAllowed"  styleClass="p-button-rounded p-button-danger" (click)="fightWithPokemon(pokemon)" class="release-button">Fight with {{pokemon.name | titlecase}}</p-button>
+  <p-button *ngIf="combatActionsAllowed" styleClass="p-button-rounded p-button-success" (click)="healPokemon(pokemon)" class="release-button">Heal {{pokemon.name | titlecase}}</p-button>
+</div>
+<p>{{errorMessage}}</p>
 
