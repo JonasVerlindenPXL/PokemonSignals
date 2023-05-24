@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Pokemon} from "../../models/pokemon.model";
 import {ColorDetermineService} from "../../services/color-determine.service";
 import {TeamService} from "../../services/team.service";
@@ -8,12 +8,11 @@ import {TeamService} from "../../services/team.service";
   templateUrl: './pokemon-team-card.component.html',
   styleUrls: ['./pokemon-team-card.component.css']
 })
-export class PokemonTeamCardComponent {
+export class PokemonTeamCardComponent implements OnInit{
   @Input() pokemon!: Pokemon;
   errorMessage: string = "";
-  fighting$ = this.teamService.fightingStatus$;
-  healing$ = this.teamService.healingStatus$;
-  releasing$ = this.teamService.releasingStatus$;
+  combatActionsAllowed: boolean = false;
+
 
   constructor(private teamService: TeamService, private colorDetermineService: ColorDetermineService) {
   }
@@ -64,5 +63,11 @@ export class PokemonTeamCardComponent {
     } else {
       this.errorMessage = "Your pokemon has fainted. Heal it to fight again!"
     }
+  }
+
+  ngOnInit(): void {
+    this.combatActionsAllowed = window.location.pathname == "/home"
+    console.log(this.combatActionsAllowed)
+    console.log(window.location.pathname)
   }
 }

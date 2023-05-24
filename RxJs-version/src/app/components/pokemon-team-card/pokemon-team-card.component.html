@@ -25,13 +25,11 @@
     </div>
   </div>
 </div>
-<div class="status">
-  <p *ngIf="releasing$ | async">Releasing {{pokemon.name}}</p>
-  <p *ngIf="fighting$ | async">Fighting</p>
-  <p *ngIf="healing$ | async">Healing</p>
+
+<div class="actions">
+  <p-button styleClass="p-button-rounded p-button-secondary" (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</p-button>
+  <p-button *ngIf="combatActionsAllowed"  styleClass="p-button-rounded p-button-danger" (click)="fightWithPokemon(pokemon)" class="release-button">Fight with {{pokemon.name | titlecase}}</p-button>
+  <p-button *ngIf="combatActionsAllowed" styleClass="p-button-rounded p-button-success" (click)="healPokemon(pokemon)" class="release-button">Heal {{pokemon.name | titlecase}}</p-button>
 </div>
-<button (click)="deleteClickedPokemon(pokemon)" class="release-button">Release</button>
-<button (click)="fightWithPokemon(pokemon)" class="release-button">Fight with {{pokemon.name | titlecase}}</button>
-<button (click)="healPokemon(pokemon)" class="release-button">Heal {{pokemon.name | titlecase}}</button>
 <p>{{errorMessage}}</p>
 

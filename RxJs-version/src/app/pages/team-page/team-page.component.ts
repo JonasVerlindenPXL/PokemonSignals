@@ -3,16 +3,19 @@ import {map} from "rxjs";
 import {TeamService} from "../../services/team.service";
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-team-page',
+  templateUrl: './team-page.component.html',
+  styleUrls: ['./team-page.component.css']
 })
-export class HomePageComponent {
+export class TeamPageComponent {
   pokemons$ = this.teamService.pokemons$;
   teamSet$ = this.teamService.pokemons$
     .pipe(
       map(pokemons => pokemons.length > 0));
   money$ = this.teamService.money$;
+  fighting$ = this.teamService.fightingStatus$;
+  healing$ = this.teamService.healingStatus$;
+  releasing$ = this.teamService.releasingStatus$;
 
   constructor(private teamService: TeamService) {
   }

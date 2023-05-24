@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="container-team">
+    <div *ngIf="teamSet$ | async; else noTeamPresent" class="team">
+      <h1>You have a team</h1>
+      <p>Balance: {{money$.getValue() | currency}}</p>
+      <div class="status">
+        <h2 *ngIf="releasing$ | async">Releasing</h2>
+        <h2 *ngIf="fighting$ | async">Fighting</h2>
+        <h2 *ngIf="healing$ | async">Healing</h2>
+      </div>
+
+      <div *ngIf="(pokemons$ | async) as pokemons" class="team-listing">
+        <app-pokemon-team-card *ngFor=" let pokemon of pokemons" [pokemon]="pokemon"></app-pokemon-team-card>
+      </div>
+      <p-button  styleClass="p-button-rounded" routerLink="/search">Start the hunt</p-button>
+    </div>
+    <ng-template #noTeamPresent>
+      <h1>No Team</h1>
+      <h2>Go look for some pokemon!</h2>
+      <p-button styleClass="p-button-rounded" routerLink="/search">Start the search</p-button>
+    </ng-template>
+  </div>
+</div>
