@@ -1,7 +1,8 @@
 import {BehaviorSubject} from "rxjs";
+import {signal} from "@angular/core";
 
 export class Pokemon {
-  public currentHp$: BehaviorSubject<number>
+  public currentHpSignal = signal<number>(0)
 
   constructor(
     public name: string,
@@ -12,7 +13,7 @@ export class Pokemon {
     public baseHp: number,
     public currentHp: number
   ) {
-    this.currentHp$ = new BehaviorSubject<number>(currentHp);
+    this.currentHpSignal = signal(currentHp);
   }
 }
 

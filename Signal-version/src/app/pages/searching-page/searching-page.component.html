@@ -4,7 +4,7 @@
     <app-pokemon-search></app-pokemon-search>
     <p-button styleClass="p-button-rounded p-button-secondary" routerLink="/home">Back to the team Page</p-button>
   </div>
-  <div class="container-right" *ngIf="(pokemons$ | async) as pokemons">
+  <div class="container-right" *ngIf="pokemons() as pokemons">
     <h1 *ngIf="pokemons.length > 0">Currently in the team</h1>
     <div class="container-right-team">
       <div *ngFor=" let pokemon of pokemons">

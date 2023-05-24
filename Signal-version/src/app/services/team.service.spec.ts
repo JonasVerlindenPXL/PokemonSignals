@@ -18,7 +18,7 @@ describe('TeamService', () => {
       sprites: {front_default: ''},
       baseHp: 60,
       currentHp: 60,
-      currentHp$: new BehaviorSubject<number>(60),
+      currentHpSignal: new BehaviorSubject<number>(60),
     };
   });
 
@@ -55,12 +55,12 @@ describe('TeamService', () => {
   it('should update the current HP of a Pokemon when fighting', () => {
     service.addToTeam(pokemon);
 
-    const initialHp = pokemon.currentHp$.getValue();
+    const initialHp = pokemon.currentHpSignal.getValue();
     service.fightPokemon(pokemon);
 
     service.pokemons$.subscribe((pokemons) => {
       const updatedPokemon = pokemons.find((p) => p === pokemon);
-      expect(updatedPokemon?.currentHp$.getValue()).toBeLessThan(initialHp);
+      expect(updatedPokemon?.currentHpSignal.getValue()).toBeLessThan(initialHp);
     });
   });
 
@@ -75,7 +75,7 @@ describe('TeamService', () => {
       sprites: {front_default: ''},
       baseHp: 80,
       currentHp: 80,
-      currentHp$: new BehaviorSubject<number>(40),
+      currentHpSignal: new BehaviorSubject<number>(40),
     };
 
     service.addToTeam(pokemon);
@@ -84,7 +84,7 @@ describe('TeamService', () => {
 
     service.pokemons$.subscribe((pokemons) => {
       const updatedPokemon = pokemons.find((p) => p === pokemon);
-      expect(updatedPokemon?.currentHp$.getValue()).toEqual(pokemon.baseHp);
+      expect(updatedPokemon?.currentHpSignal.getValue()).toEqual(pokemon.baseHp);
       expect(updatedPokemon?.moves[0].move.currentPp).toEqual(pokemon.moves[0].move.maxPp);
     });
   });

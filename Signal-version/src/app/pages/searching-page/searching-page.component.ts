@@ -7,7 +7,7 @@ import {TeamService} from "../../services/team.service";
   styleUrls: ['./searching-page.component.css']
 })
 export class SearchingPageComponent {
-  pokemons$ = this.teamService.pokemons$
+  pokemons = this.teamService.pokemons
 
   constructor(private teamService: TeamService) {
   }

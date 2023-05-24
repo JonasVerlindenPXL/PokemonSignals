@@ -18,7 +18,7 @@ export class PokemonTeamCardComponent implements OnInit{
   }
 
   getHpBarWidth(pokemon: Pokemon): string {
-    const percentage = (pokemon.currentHp$.getValue() / pokemon.baseHp) * 100;
+    const percentage = (pokemon.currentHpSignal() / pokemon.baseHp) * 100;
     const barWidth = (percentage / 100) * 200;
     return `${barWidth}px`;
   }
@@ -46,19 +46,16 @@ export class PokemonTeamCardComponent implements OnInit{
   }
 
   deleteClickedPokemon(pokemonToDelete: Pokemon) {
-    this.teamService.releasingStatus$.next(true);
     this.teamService.removeFromTeam(pokemonToDelete);
   }
 
   healPokemon(pokemon: Pokemon) {
-    this.teamService.healingStatus$.next(true);
     this.teamService.healPokemon(pokemon)
     this.errorMessage = ""
   }
 
   fightWithPokemon(pokemon: Pokemon) {
-    if (pokemon.currentHp$.getValue() > 0) {
-      this.teamService.fightingStatus$.next(true);
+    if (pokemon.currentHpSignal() > 0) {
       this.teamService.fightPokemon(pokemon);
     } else {
       this.errorMessage = "Your pokemon has fainted. Heal it to fight again!"
