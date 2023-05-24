@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Pokemon} from "../models/pokemon.model";
 
 @Injectable({
@@ -25,7 +25,10 @@ export class ColorDetermineService {
     steel: '#B7B7CE',
     fairy: '#D685AD'
   };
-  constructor() { }
+
+  constructor() {
+  }
+
   getTypeColorBorder(typeName: string, pokemon: Pokemon): string {
     // Check if the Pokemon has multiple types
     if (pokemon.types.length > 1) {
@@ -39,6 +42,7 @@ export class ColorDetermineService {
       return this.typeColors[typeName] || '';
     }
   }
+
   getTypeColor(typeName: string): string {
 
     // Check if the type name exists in the typeColors object

@@ -1,16 +1,18 @@
-.container{
+.container {
   display: grid;
   grid-template-columns: 60% 40%;
   padding: 10px;
 
 }
-.team-listing{
+
+.team-listing {
   display: grid;
   grid-template-columns: repeat(2, 49%);
   gap: 1%;
   margin: 2rem;
 }
-.actions{
+
+.actions {
   background-color: #efefef;
   width: fit-content;
   padding: 2rem;
@@ -18,7 +20,8 @@
   height: 10rem;
   margin: 2rem;
 }
-.container-team{
+
+.container-team {
   background-color: #efefef;
   padding: 2rem;
   margin: 1rem;

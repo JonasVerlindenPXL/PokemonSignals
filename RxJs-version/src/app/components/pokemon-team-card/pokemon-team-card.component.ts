@@ -58,7 +58,7 @@ export class PokemonTeamCardComponent {
   }
 
   fightWithPokemon(pokemon: Pokemon) {
-    if (pokemon.currentHp$.getValue() > 0){
+    if (pokemon.currentHp$.getValue() > 0) {
       this.teamService.fightingStatus$.next(true);
       this.teamService.fightPokemon(pokemon);
     } else {

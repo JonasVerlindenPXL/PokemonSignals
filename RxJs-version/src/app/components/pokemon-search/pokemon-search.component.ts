@@ -10,16 +10,15 @@ import {Team} from "../../models/team.model";
   templateUrl: './pokemon-search.component.html',
   styleUrls: ['./pokemon-search.component.css']
 })
-export class PokemonSearchComponent{
-  pokemon$: Observable<Pokemon>| undefined;
+export class PokemonSearchComponent {
+  pokemon$: Observable<Pokemon> | undefined;
   errorMessage: string = '';
-  team! : Team;
+  team!: Team;
   catching$ = this.teamService.catchingStatus$;
 
 
   constructor(private pokemonApiService: PokemonApiService, private teamService: TeamService) {
   }
-
 
   searchPokemon(name: string): void {
     this.errorMessage = ''
@@ -30,7 +29,8 @@ export class PokemonSearchComponent{
       })
     );
   }
-  addPokemon(pokemon: Pokemon){
+
+  addPokemon(pokemon: Pokemon) {
     this.teamService.catchingStatus$.next(true);
     this.teamService.addToTeam(pokemon);
     this.pokemon$ = undefined

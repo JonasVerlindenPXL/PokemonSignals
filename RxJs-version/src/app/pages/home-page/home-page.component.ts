@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {map, take} from "rxjs";
+import {map} from "rxjs";
 import {TeamService} from "../../services/team.service";
 
 @Component({

@@ -1,8 +1,7 @@
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
-import { TeamService } from './team.service';
-import { Pokemon } from '../models/pokemon.model';
-import {map} from "rxjs/operators";
+import {BehaviorSubject} from 'rxjs';
+import {TeamService} from './team.service';
+import {Pokemon} from '../models/pokemon.model';
 
 describe('TeamService', () => {
   let service: TeamService;
@@ -16,7 +15,7 @@ describe('TeamService', () => {
       types: [],
       moves: [],
       stats: [],
-      sprites: { front_default: '' },
+      sprites: {front_default: ''},
       baseHp: 60,
       currentHp: 60,
       currentHp$: new BehaviorSubject<number>(60),
@@ -70,10 +69,10 @@ describe('TeamService', () => {
       name: 'Venusaur',
       types: [],
       moves: [
-        { move: { name: 'Razor Leaf', maxPp: 10, currentPp: 0 } },
+        {move: {name: 'Razor Leaf', maxPp: 10, currentPp: 0}},
       ],
       stats: [],
-      sprites: { front_default: '' },
+      sprites: {front_default: ''},
       baseHp: 80,
       currentHp: 80,
       currentHp$: new BehaviorSubject<number>(40),

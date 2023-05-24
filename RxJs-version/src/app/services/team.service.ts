@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Action} from "../models/team.model";
 import {Pokemon} from "../models/pokemon.model";
 import {debounceTime, scan, shareReplay} from "rxjs/operators";
-import {BehaviorSubject, Subject, tap} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

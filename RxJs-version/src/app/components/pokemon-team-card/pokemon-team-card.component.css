@@ -1,10 +1,11 @@
-.card{
+.card {
   display: flex;
   align-items: center;
   padding: 10px;
   border-radius: 5px;
   width: 450px;
 }
+
 .pokemon-card {
   display: flex;
   align-items: center;
@@ -45,6 +46,7 @@
 .gradient {
   background: linear-gradient(to right, red, blue);
 }
+
 .hp-bar {
   height: 10px;
   background-color: gray;
@@ -64,11 +66,13 @@
   background-color: green;
   height: 100%;
 }
-.pokemon-moves{
+
+.pokemon-moves {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 5px;
 }
-.release-button{
+
+.release-button {
   margin: 5px;
 }

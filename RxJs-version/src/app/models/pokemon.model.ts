@@ -2,6 +2,7 @@ import {BehaviorSubject} from "rxjs";
 
 export class Pokemon {
   public currentHp$: BehaviorSubject<number>
+
   constructor(
     public name: string,
     public types: Types[],
@@ -14,6 +15,7 @@ export class Pokemon {
     this.currentHp$ = new BehaviorSubject<number>(currentHp);
   }
 }
+
 export interface Types {
   slot: string;
   type: Type
@@ -27,8 +29,9 @@ export interface Type {
 export interface Moves {
   move: Move;
 }
-export interface Move{
-  name:string;
+
+export interface Move {
+  name: string;
   maxPp: number;
   currentPp: number;
 }
@@ -38,7 +41,8 @@ export interface Stats {
   effort: number;
   stat: Stat;
 }
-export interface Stat{
+
+export interface Stat {
   name: string;
   url: string;
 }

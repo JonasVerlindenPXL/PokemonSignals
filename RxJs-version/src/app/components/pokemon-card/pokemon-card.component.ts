@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Pokemon} from "../../models/pokemon.model";
-import {TeamService} from "../../services/team.service";
 import {ColorDetermineService} from "../../services/color-determine.service";
 
 @Component({
@@ -10,6 +9,7 @@ import {ColorDetermineService} from "../../services/color-determine.service";
 })
 export class PokemonCardComponent {
   @Input() pokemon!: Pokemon;
+
   constructor(private colorDetermineService: ColorDetermineService) {
   }
 
