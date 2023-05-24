@@ -1,32 +1,55 @@
 import {Injectable, signal} from '@angular/core';
-import {Action} from "../models/team.model";
 import {Pokemon} from "../models/pokemon.model";
-import {debounceTime, scan, shareReplay} from "rxjs/operators";
-import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
   money = signal(0);
-
   pokemons = signal<Pokemon[]>([]);
+  catchingStatus = signal(false);
+  fightingStatus = signal(false)
+  healingStatus = signal(false);
+  releasingStatus = signal(false);
 
 
   addToTeam(pokemonToAdd: Pokemon): void {
-    this.pokemons.mutate(pokemons => pokemons.push(pokemonToAdd));
+    this.catchingStatus.set(true);
+    setTimeout(() => {
+      this.pokemons.mutate(pokemons => pokemons.push(pokemonToAdd));
+      this.catchingStatus.set(false);
+    }, 800);
   }
 
+
   removeFromTeam(pokemonToRemove: Pokemon): void {
-    this.pokemons.update(pokemons => pokemons.filter(pokemon =>
-      pokemon.name !== pokemonToRemove.name));
+    this.releasingStatus.set(true);
+    setTimeout(() => {
+      this.pokemons.update(pokemons => pokemons.filter(pokemon =>
+        pokemon.name !== pokemonToRemove.name));
+      this.releasingStatus.set(false);
+    }, 800);
   }
 
   fightPokemon(pokemonToUpdate: Pokemon): void {
-    this.pokemons.update(pokemons =>
-      pokemons.map(pokemon =>
-        pokemon.name === pokemonToUpdate.name ? this.calculateDamageAndPpUsage(pokemon) : pokemon))
+    this.fightingStatus.set(true);
+    setTimeout(() => {
+      this.pokemons.update(pokemons =>
+        pokemons.map(pokemon =>
+          pokemon.name === pokemonToUpdate.name ? this.calculateDamageAndPpUsage(pokemon) : pokemon));
+      this.fightingStatus.set(false);
+    }, 800);
   }
+
+  healPokemon(pokemonToHeal: Pokemon) {
+    this.healingStatus.set(true);
+    setTimeout(() => {
+      this.pokemons.update(pokemons =>
+        pokemons.map(pokemon => pokemon.name === pokemonToHeal.name ? this.healGivenPokemon(pokemon) : pokemon));
+      this.healingStatus.set(false);
+    }, 800);
+  }
+
 
   private calculateDamageAndPpUsage(pokemonToUpdate: Pokemon) {
     if (pokemonToUpdate.currentHpSignal() > 0) {
@@ -45,12 +68,7 @@ export class TeamService {
     return pokemonToUpdate
   }
 
-  healPokemon(pokemonToHeal: Pokemon) {
-    this.pokemons.update(pokemons =>
-      pokemons.map(pokemon => pokemon.name === pokemonToHeal.name ? this.healGivenPokemon(pokemon) : pokemon));
-  }
-
-  healGivenPokemon(pokemonToHeal: Pokemon) {
+  private healGivenPokemon(pokemonToHeal: Pokemon) {
     pokemonToHeal.currentHpSignal.set(pokemonToHeal.baseHp);
     pokemonToHeal.moves.forEach(move => {
       move.move.currentPp = move.move.maxPp;

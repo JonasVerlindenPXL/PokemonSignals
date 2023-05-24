@@ -11,9 +11,9 @@ export class TeamPageComponent {
   pokemons = this.teamService.pokemons;
   teamSet = this.teamService.pokemons().length > 0;
   money = this.teamService.money;
-  // fighting = this.teamService.fightingStatus;
-  // healing = this.teamService.healingStatus;
-  // releasing = this.teamService.releasingStatus;
+  fighting = this.teamService.fightingStatus;
+  healing = this.teamService.healingStatus;
+  releasing = this.teamService.releasingStatus;
 
   constructor(private teamService: TeamService) {
   }

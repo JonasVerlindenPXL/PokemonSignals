@@ -9,8 +9,8 @@
     <app-pokemon-card [pokemon]="pokemon"></app-pokemon-card>
     <p-button styleClass="p-button-rounded" (click)="addPokemon(pokemon)">Capture!</p-button>
   </div>
-<!--  <div class="pokemon-catching" *ngIf="catching()">-->
-<!--    <h3>Catching pokemon</h3>-->
-<!--  </div>-->
+  <div class="pokemon-catching" *ngIf="catching()">
+    <h3>Catching pokemon</h3>
+  </div>
   <p *ngIf="errorMessage">{{errorMessage}}</p>
 </div>

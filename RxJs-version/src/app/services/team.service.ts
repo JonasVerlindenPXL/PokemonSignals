@@ -86,18 +86,15 @@ export class TeamService {
       this.healingStatus$.next(false);
       const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
       if (pokemonToUpdate) {
-        const pokemonToUpdate = pokemons.find(pokemon => pokemon === operation.pokemon);
-        if (pokemonToUpdate) {
-          pokemonToUpdate.currentHp$.next(pokemonToUpdate.baseHp);
-          pokemonToUpdate.moves.forEach(move => {
-            move.move.currentPp = move.move.maxPp;
-          });
-          this.money$.next(this.money$.getValue() - 10);
-        }
-        return pokemons;
+        pokemonToUpdate.currentHp$.next(pokemonToUpdate.baseHp);
+        pokemonToUpdate.moves.forEach(move => {
+          move.move.currentPp = move.move.maxPp;
+        });
+        this.money$.next(this.money$.getValue() - 10);
       }
-      return [...pokemons];
+      return pokemons;
     }
     return [...pokemons];
   }
+
 }

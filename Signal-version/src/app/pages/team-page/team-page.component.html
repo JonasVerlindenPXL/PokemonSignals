@@ -3,11 +3,11 @@
     <div *ngIf="teamSet; else noTeamPresent" class="team">
       <h1>You have a team</h1>
       <p>Balance: {{money() | currency}}</p>
-<!--      <div class="status">-->
-<!--        <h2 *ngIf="releasing()">Releasing</h2>-->
-<!--        <h2 *ngIf="fighting()">Fighting</h2>-->
-<!--        <h2 *ngIf="healing()">Healing</h2>-->
-<!--      </div>-->
+      <div class="status">
+        <h2 *ngIf="releasing()">Releasing</h2>
+        <h2 *ngIf="fighting()">Fighting</h2>
+        <h2 *ngIf="healing()">Healing</h2>
+      </div>
 
       <div *ngIf="pokemons() as pokemons" class="team-listing">
         <app-pokemon-team-card *ngFor=" let pokemon of pokemons" [pokemon]="pokemon"></app-pokemon-team-card>

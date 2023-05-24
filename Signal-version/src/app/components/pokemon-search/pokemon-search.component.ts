@@ -14,6 +14,7 @@ export class PokemonSearchComponent {
   pokemon$: Observable<Pokemon> | undefined;
   errorMessage: string = '';
   team!: Team;
+  catching = this.teamService.catchingStatus;
 
 
   constructor(private pokemonApiService: PokemonApiService, private teamService: TeamService) {
