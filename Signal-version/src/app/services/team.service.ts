@@ -21,7 +21,6 @@ export class TeamService {
     }, 800);
   }
 
-
   removeFromTeam(pokemonToRemove: Pokemon): void {
     this.releasingStatus.set(true);
     setTimeout(() => {
@@ -75,6 +74,5 @@ export class TeamService {
     });
     this.money.set(this.money() - 10);
     return pokemonToHeal;
-
   }
 }

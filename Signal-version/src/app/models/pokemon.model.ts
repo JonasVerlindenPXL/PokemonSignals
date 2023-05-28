@@ -1,4 +1,3 @@
-import {BehaviorSubject} from "rxjs";
 import {signal} from "@angular/core";
 
 export class Pokemon {

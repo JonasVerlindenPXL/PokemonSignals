@@ -16,7 +16,6 @@ export class PokemonSearchComponent {
   team!: Team;
   catching = this.teamService.catchingStatus;
 
-
   constructor(private pokemonApiService: PokemonApiService, private teamService: TeamService) {
   }
 
@@ -34,5 +33,4 @@ export class PokemonSearchComponent {
     this.teamService.addToTeam(pokemon);
     this.pokemon$ = undefined
   }
-
 }
