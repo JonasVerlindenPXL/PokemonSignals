@@ -9,7 +9,6 @@ import {BehaviorSubject, Subject} from "rxjs";
 })
 export class TeamService {
 
-  // Add pokemon action
   private pokemonSubject$ = new Subject<Action<Pokemon>>();
   pokemonAction$ = this.pokemonSubject$.asObservable();
   money$ = new BehaviorSubject<number>(0);
