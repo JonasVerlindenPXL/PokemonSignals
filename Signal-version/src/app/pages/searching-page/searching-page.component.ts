@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, Signal, WritableSignal} from '@angular/core';
 import {TeamService} from "../../services/team.service";
+import {Pokemon} from "../../models/pokemon.model";
 
 @Component({
   selector: 'app-searching-page',
@@ -7,7 +8,7 @@ import {TeamService} from "../../services/team.service";
   styleUrls: ['./searching-page.component.css']
 })
 export class SearchingPageComponent {
-  pokemons = this.teamService.pokemons
+  pokemons: WritableSignal<Pokemon[]> = this.teamService.pokemons
 
   constructor(private teamService: TeamService) {
   }

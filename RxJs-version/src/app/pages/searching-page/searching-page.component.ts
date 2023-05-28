@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {TeamService} from "../../services/team.service";
+import {Observable} from "rxjs";
+import {Pokemon} from "../../models/pokemon.model";
 
 @Component({
   selector: 'app-searching-page',
@@ -7,7 +9,7 @@ import {TeamService} from "../../services/team.service";
   styleUrls: ['./searching-page.component.css']
 })
 export class SearchingPageComponent {
-  pokemons$ = this.teamService.pokemons$
+  pokemons$: Observable<Pokemon[]> = this.teamService.pokemons$
 
   constructor(private teamService: TeamService) {
   }

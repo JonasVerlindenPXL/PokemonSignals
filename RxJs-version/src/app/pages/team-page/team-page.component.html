@@ -2,7 +2,7 @@
   <div class="container-team">
     <div *ngIf="teamSet$ | async; else noTeamPresent" class="team">
       <h1>You have a team</h1>
-      <p>Balance: {{money$.getValue() | currency}}</p>
+      <p>Balance: {{(money$ | async) | currency}}</p>
       <div class="status">
         <h2 *ngIf="releasing$ | async">Releasing</h2>
         <h2 *ngIf="fighting$ | async">Fighting</h2>
