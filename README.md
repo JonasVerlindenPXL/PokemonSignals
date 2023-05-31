@@ -10,6 +10,7 @@ Lost the survey? [Click here!](https://forms.gle/rzdmB5J8jFRKS1yw8)
 If you want to play around with my application then follow these steps;
 - clone the repository.
 - open either of the two applications inside your favorite IDE.
+- run ``` npm install ``` to install the needed dependencies.
 - run ``` ng serve ``` to run the app.
 - serve to [localhost](http://localhost:4200/) and enjoy the minigame!
 
