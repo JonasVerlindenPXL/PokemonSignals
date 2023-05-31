@@ -4,6 +4,8 @@ Thank you for your help regarding my research on the new reactive primitive call
 
 Once you have familiarized yourself with the code, I would greatly appreciate your input on a few questions. Specifically, I am interested in your thoughts on the impact of Signals and whether you perceive this change to be positive or negative. Your insights will be valuable in assessing the significance and implications of Signals in Angular.
 
+Lost the survey? [Click here!](https://forms.gle/rzdmB5J8jFRKS1yw8)
+
 ## Setup
 If you want to play around with my application then follow these steps;
 - clone the repository.
