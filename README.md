@@ -15,6 +15,6 @@ If you want to play around with my application then follow these steps;
 - serve to [localhost](http://localhost:4200/) and enjoy the minigame!
 
 ## Feedback
-I'm still a junior in Frontend development with the Angular framework. If you have some experience and notice some errors, faults or have some tips on how to improve regarding what is shown in these applications, do let me know. You can do this by sending a me message on Slack! 
+I'm still a junior in Frontend development with the Angular framework. If you have some experience and notice some errors, faults or have some tips on how to improve regarding what is shown in these applications, do let me know. You can do this by sending me a message on Slack! 
 
 Thank you once again for your time and contribution to this research.
